@@ -53,3 +53,30 @@ export const prepareProducts = (products: Product[]) => {
 		};
 	});
 };
+
+// Función para formatear la fecha a formato 3 de enero de 2022
+export const formatDateLong = (date: string): string => {
+	const dateObject = new Date(date);
+
+	return dateObject.toLocaleDateString('es-ES', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+};
+
+// Función para obtener el estado del pedido en español
+export const getStatus = (status: string): string => {
+	switch (status) {
+		case 'Pending':
+			return 'Pendiente';
+		case 'Paid':
+			return 'Pagado';
+		case 'Shipped':
+			return 'Enviado';
+		case 'Delivered':
+			return 'Entregado';
+		default:
+			return status;
+	}
+};

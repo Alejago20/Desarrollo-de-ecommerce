@@ -1,26 +1,38 @@
-import { HiOutlineSearch, HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
-import {  navbarLinks} from "../../constants/links";
-import { NavLink,Link } from "react-router-dom";
-import { FaBarsStaggered } from "react-icons/fa6";
-import { Logo } from "./Logo";
-import { useGlobalStore } from "../../store/global.store";
-import { useCartStore } from "../../store/cart.store";
-import { useUser } from "../../hooks";
-import { Session } from "@supabase/supabase-js";
-import { LuLoader2 } from "react-icons/lu";
+import { Link, NavLink } from 'react-router-dom';
+import { navbarLinks } from '../../constants/links';
+import {
+	HiOutlineSearch,
+	HiOutlineShoppingBag,
+	HiOutlineUser,
+} from 'react-icons/hi';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { Logo } from './Logo';
+import { useGlobalStore } from '../../store/global.store';
+import { useCartStore } from '../../store/cart.store';
+import { useCustomer, useUser } from '../../hooks';
+import { LuLoader2 } from 'react-icons/lu';
+
 export const Navbar = () => {
-const openShet= useGlobalStore(state=>state.openSheet);
-const totalItemsInCart=useCartStore(state=>state.totalItemsInCart);
-const setActiveNavMobile=useGlobalStore(state=>state.setActiveNavMobile);
+	const openSheet = useGlobalStore(state => state.openSheet);
 
-const { session, isLoading } = useUser();
+	const totalItemsInCart = useCartStore(
+		state => state.totalItemsInCart
+	);
 
-const userId = session?.user.id;
-  return (
-    <header className='bg-white tex-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
-    <Logo></Logo>
+	const setActiveNavMobile = useGlobalStore(
+		state => state.setActiveNavMobile
+	);
 
-<nav className="space-x-5 hidden md:flex" > 
+	const { session, isLoading } = useUser();
+
+	const userId = session?.user.id;
+	const { data: customer } = useCustomer(userId!);
+
+	return (
+		<header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
+			<Logo />
+
+			<nav className='space-x-5 hidden md:flex'>
 				{navbarLinks.map(link => (
 					<NavLink
 						key={link.id}
@@ -36,40 +48,47 @@ const userId = session?.user.id;
 				))}
 			</nav>
 
-			<div className="flex gap-5 item-center">
-				<button 	onClick={()=>openShet('search')}>
-					<HiOutlineSearch size={25}></HiOutlineSearch>
+			<div className='flex gap-5 items-center'>
+				<button onClick={() => openSheet('search')}>
+					<HiOutlineSearch size={25} />
 				</button>
 
-				{
-					isLoading ? (
-						<LuLoader2 className='animate-spin' size={60} />
-					): session ?(
-						<div className="relative">
-						<Link to='/account'
-						className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'
-					 >
-						 R
+				{isLoading ? (
+					<LuLoader2 className='animate-spin' size={60} />
+				) : session ? (
+					<div className='relative'>
+						{/* User Nav */}
+						<Link
+							to='/account'
+							className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'
+						>
+							{customer && customer.full_name[0]}
 						</Link>
 					</div>
-					):(
-						<Link to='/login'>
+				) : (
+					<Link to='/login'>
 						<HiOutlineUser size={25} />
 					</Link>
-					)
-				}
+				)}
 
-				<button className="relative" 
-				onClick={()=>openShet('cart')}>
-					<span className="absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full"> {totalItemsInCart}</span>
-					<HiOutlineShoppingBag size={25}></HiOutlineShoppingBag>
+				<button
+					className='relative'
+					onClick={() => openSheet('cart')}
+				>
+					<span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>
+						{totalItemsInCart}
+					</span>
+					<HiOutlineShoppingBag size={25} />
 				</button>
 			</div>
-		{/* el boton que activa el menu y va estar oculto para pantalla mayores a 768, activa el menu responsive para pantallas mobiles */}
-		<button className="md:hidden" 
-		onClick={()=> setActiveNavMobile(true)}>
-			<FaBarsStaggered size={25}></FaBarsStaggered>
-		</button>
-    </header>
-  )
-}
+{/* el boton que activa el menu y va estar oculto para pantalla mayores a 768, activa el menu responsive para pantallas mobiles */}
+
+			<button
+				className='md:hidden'
+				onClick={() => setActiveNavMobile(true)}
+			>
+				<FaBarsStaggered size={25} />
+			</button>
+		</header>
+	);
+};

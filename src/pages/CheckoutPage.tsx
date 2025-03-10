@@ -1,12 +1,32 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useCartStore } from "../store/cart.store";
 import { FormCheckout } from "../components/checkout/FormCheckout";
 import { ItemsCheckout } from "../components/checkout/ItemsCheckout";
+import { Loader } from "../components/shared/Loader";
+import { useUser } from "../hooks";
+import { useEffect } from "react";
+import { supabase } from "../supabase/client";
 
 
 const CheckoutPage = () => {
     //total elementos que hay en el carrito
     const totalItems = useCartStore(state => state.totalItemsInCart);
+	
+	const { isLoading } = useUser();
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			//cuando se cierra sesion o no hay una sesion activa quiero que navegue a login
+			if (event === 'SIGNED_OUT' || !session) {
+				navigate('/login');
+			}
+		});
+	}, [navigate]);
+
+	if (isLoading) return <Loader/>;
+
   return (
     <div
       style={{minHeight:'calc(100vh-100px)',

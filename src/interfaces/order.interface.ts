@@ -19,3 +19,10 @@ export interface OrderInput {
 	}[];
 	totalAmount: number;
 }
+export interface OrderItemSingle {
+	//Ítem de Orden Única
+	created_at: string;
+	id: number;
+	status: string;
+	total_amount: number;
+}
