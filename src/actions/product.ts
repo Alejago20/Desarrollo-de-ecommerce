@@ -12,19 +12,30 @@ import { supabase } from "../supabase/client"
 
 //traer los productos y va ordenarlo por fecha de creacion
 //acceder productos de la base de datos
-export const getProducts =async () => {
-    const{data: products,error }=await supabase
-    .from('products')
-    .select('*, variants(*)')
-    .order('created_at', {ascending: false});
 
-    if (error) {
-        console.log(error.message);
-        throw new Error(error.message);
-    }
+// vamos a traerlo los productos y traerlo por paginacion
+export const getProducts = async (page: number) => {
+	const itemsPerPage = 10;
+	const from = (page - 1) * itemsPerPage;
+	const to = from + itemsPerPage - 1;
 
-    return products;
-}
+	const {
+		data: products,
+		error,
+		count,
+	} = await supabase
+		.from('products')
+		.select('*, variants(*)', { count: 'exact' })
+		.order('created_at', { ascending: false })
+		.range(from, to);
+
+	if (error) {
+		console.log(error.message);
+		throw new Error(error.message);
+	}
+
+	return { products, count };
+};
 
 // FILTRADO DE PRODUCTO POR PAGINACION
 export const getFilteredProducts = async ({

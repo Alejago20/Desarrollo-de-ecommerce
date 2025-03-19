@@ -1,4 +1,6 @@
 import {
+	FaBoxOpen,
+	FaCartShopping,
 	FaFacebookF,
 	FaInstagram,
 	FaTiktok,
@@ -47,5 +49,20 @@ export const socialLinks = [
 		title: 'Tiktok',
 		href: 'https://www.tiktok.com',
 		icon: <FaTiktok />,
+	},
+];
+
+export const dashboardLinks = [
+	{
+		id: 1,
+		title: 'Productos',
+		href: '/dashboard/productos',
+		icon: <FaBoxOpen size={25} />,
+	},
+	{
+		id: 2,
+		title: 'Ordenes',
+		href: '/dashboard/ordenes',
+		icon: <FaCartShopping size={25} />,
 	},
 ];

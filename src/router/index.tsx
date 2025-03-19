@@ -9,12 +9,12 @@ import {
   RegisterPage,
   OrdersUserPage,
   ThankYouPage,
-  OrderUserPage
- 
-
+  OrderUserPage,
 } from "../pages";
 import { ClientLayout } from "../layouts/ClientLayout";
 import CheckoutPage from "../pages/CheckoutPage";
+import { DashboardLayout } from '../layouts/DashboardLayout';
+import { DashboardProductsPage } from '../pages/dashboard/DashboardProductsPage';
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        index: true,
+        index: true, // <- Ruta predeterminada cuando se accede a "/
         element: <HomePage />,
       },
       {
@@ -55,12 +55,12 @@ export const router = createBrowserRouter([
           },
           {
             path: "pedidos",
-            element: <OrdersUserPage/>,
+            element: <OrdersUserPage />,
           },
           {
             path: "pedidos/:id",
-            element: <OrderUserPage/>,
-          }
+            element: <OrderUserPage />,
+          },
         ],
       },
     ],
@@ -72,6 +72,20 @@ export const router = createBrowserRouter([
   },
   {
     path: "/checkout/:id/thank-you",
-    element: <ThankYouPage/>,
-  }
+    element: <ThankYouPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout/>,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/dashboard/productos"/>,
+      },
+      {
+        path: "productos",
+        element: <DashboardProductsPage/>,
+      },
+    ],
+  },
 ]);

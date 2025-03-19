@@ -9,9 +9,10 @@ import { NavbarMobile } from '../components/shared/NavbarMobile';
 
 export const RootLayout = () => {
 	const { pathname } = useLocation();
-	const isSheetOpen=useGlobalStore(state=>state.isSheetOpen);
-	const activeNavMobile=useGlobalStore(state=>state.activeNavMobile);
-
+	const isSheetOpen = useGlobalStore(state => state.isSheetOpen);
+	const activeNavMobile = useGlobalStore(
+		state => state.activeNavMobile
+	);
 
 	return (
 		<div className='h-screen flex flex-col font-montserrat'>
@@ -25,9 +26,10 @@ export const RootLayout = () => {
 
 			{pathname === '/' && <Newsletter />}
 
-             {isSheetOpen && <Sheet/>}
+			{isSheetOpen && <Sheet />}
 
-			 {activeNavMobile && <NavbarMobile/>}
+			{activeNavMobile && <NavbarMobile />}
+
 			<Footer />
 		</div>
 	);
