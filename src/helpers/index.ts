@@ -91,3 +91,28 @@ export const getStatus = (status: string): string => {
 			return status;
 	}
 };
+
+
+// Función para generar el slug de un producto
+export const generateSlug = (name: string): string => {
+	return name
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/(^-|-$)/g, '');
+};
+
+//Funcion para extraer el path relaativo del bucket de una URL
+export const extractFilePath=(url:string)=>{
+const parts=url.split('/storage/v1/object/public/product-images/');
+
+//EJEMPLO PARTS: ['/storage/v1/object/public/product-images/1a9d3dc1-28ff-4e67-ad3b-1f0b1257d71b/1a9d3dc1-28ff-4e67-ad3b-1f0b1257d71b-huawei-nova.jpg']
+
+if (parts.length !==2) {
+
+	throw new Error(`URL de imagen no válida: ${url}`);
+	
+}
+
+return parts[1];
+
+};

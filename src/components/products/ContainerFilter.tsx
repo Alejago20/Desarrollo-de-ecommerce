@@ -7,6 +7,7 @@ const availableBrands = [
   "Xiaomi",
   "Realme",
   "Honor",
+  "Motorola"
 ];
 
 interface Props{

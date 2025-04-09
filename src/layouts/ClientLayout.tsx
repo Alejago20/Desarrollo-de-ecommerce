@@ -38,6 +38,16 @@ export const ClientLayout = () => {
 				</NavLink>
 				{/* TODO: LINK DASHBOARD */}
 
+				
+				<NavLink
+					to="/dashboard/productos"
+					className={({ isActive }) =>
+						`${isActive ? 'underline' : 'hover:underline'}`
+					}
+				>
+					Dashboard
+				</NavLink>
+
 				<button className='hover:underline' onClick={handleLogout}>
 					Cerrar sesión
 				</button>

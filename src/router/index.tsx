@@ -15,6 +15,8 @@ import { ClientLayout } from "../layouts/ClientLayout";
 import CheckoutPage from "../pages/CheckoutPage";
 import { DashboardLayout } from '../layouts/DashboardLayout';
 import { DashboardProductsPage } from '../pages/dashboard/DashboardProductsPage';
+import { DashboardNewProductsPage } from "../pages/dashboard/DashboardNewProductsPage";
+import DashboardProductSlugPage from "../pages/dashboard/DashboardProductSlugPage";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ export const router = createBrowserRouter([
       {
         path: "productos",
         element: <DashboardProductsPage/>,
+      },
+      {
+        path: "productos/new",
+        element: <DashboardNewProductsPage/>,
+      },
+      {
+        path: "productos/editar/:slug",
+        element: <DashboardProductSlugPage/>,
       },
     ],
   },
