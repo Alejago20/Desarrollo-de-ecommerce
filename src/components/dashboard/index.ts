@@ -1,7 +1,7 @@
 export * from './Sidebar'
 
 // ORDENES
-
+export * from './orders/TableOrdersAdmin'
 // PRODUCTOS
 
 export * from './products/TableProduct'

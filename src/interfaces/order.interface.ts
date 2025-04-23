@@ -1,3 +1,4 @@
+import { useCustomer } from '../hooks/auth/useCustomer';
 // es el que va ser enviado a supabase por eso se le puso input
 export interface OrderInput {
 
@@ -25,4 +26,14 @@ export interface OrderItemSingle {
 	id: number;
 	status: string;
 	total_amount: number;
+}
+export interface OrderWithCustomer{
+	id:number;
+	status:string;
+	total_amount:number;
+	created_at:string;
+	customers:{
+		full_name:string;
+		email:string;
+	} | null;
 }
