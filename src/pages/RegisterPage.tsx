@@ -1,7 +1,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { CgPassword } from 'react-icons/cg'
 import { Link, Navigate } from 'react-router-dom'
 import { useRegister, useUser } from '../hooks/';
 import { LuLoader2 } from 'react-icons/lu';

@@ -13,6 +13,7 @@ import { UploaderImages } from "./UploaderImages";
 import { Editor } from "./Editor";
 import { useCreatorProduct, useProduct, useUpdatePrduct } from "../../../hooks";
 import { Loader } from "../../shared/Loader";
+import { JSONContent } from '@tiptap/react';
 
 
 
@@ -49,7 +50,7 @@ const{mutate:createProduct,isPending}=useCreatorProduct();
 			'features',
 			product.features.map((f:string)=>({value:f}))
 		);
-		setValue('description', product.description);
+		setValue('description', product.description as JSONContent);
 		setValue('images',product.images);
 		setValue(
 			'variants',
@@ -193,7 +194,7 @@ const watchName = watch('name');
                 <Editor
 						setValue={setValue}
 						errors={errors}
-						initialContent={product?.description}
+						initialContent={product?.description as JSONContent}
 					/>
 				</SectionFormProduct>
 	  <div className='flex gap-3 absolute top-0 right-0'>

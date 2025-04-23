@@ -290,7 +290,7 @@ export const updateProduct = async (
     // 3. Manejo de imagenes(SUBIR NUEVAS Y ELIMINAR ANTIGUAS SI ES NECESARIO)
     const folderName=productId;
 
-    const validImages=productInput.images.filter(image=>image);
+    const validImages=productInput.images.filter(image=>image) as [File | string];
 
     //3.1 Identificar las imagenes que hans sido eliminadas
     const imagesToDelete=existingImages.filter(

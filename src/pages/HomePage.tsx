@@ -4,7 +4,7 @@ import { ProductGrid } from "../components/home/ProductGrid";
 import { ProductGridSkeleton } from "../components/skeletons/ProductGridSkeleton";
 import { prepareProducts } from "../helpers";
 import { useHomeProducts } from "../hooks";
-import { Product } from '../interfaces/product.interface';
+
 
 
 

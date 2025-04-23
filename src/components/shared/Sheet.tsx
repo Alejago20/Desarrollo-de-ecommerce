@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useGlobalStore } from '../../store/global.store'
 import { Cart } from './Cart';
 import { Search } from './Search';

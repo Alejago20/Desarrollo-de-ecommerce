@@ -1,4 +1,4 @@
-import { useCustomer } from '../hooks/auth/useCustomer';
+
 // es el que va ser enviado a supabase por eso se le puso input
 export interface OrderInput {
 
